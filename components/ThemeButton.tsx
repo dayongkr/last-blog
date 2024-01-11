@@ -5,17 +5,13 @@ import { MdNightlight, MdSunny } from "react-icons/md";
 
 export default function ThemeButton() {
   const { setTheme, resolvedTheme, theme } = useTheme();
-  console.log(theme, resolvedTheme);
   return (
     <Button
       variant="ghost"
       className="p-3 text-lg relative"
       onClick={() => {
-        if (theme === "dark" || resolvedTheme === "dark") {
-          setTheme("light");
-        } else {
-          setTheme("dark");
-        }
+        if (theme === "dark" || resolvedTheme === "dark") setTheme("light");
+        else setTheme("dark");
       }}
     >
       <MdSunny className="scale-100 dark:scale-0 absolute" />
