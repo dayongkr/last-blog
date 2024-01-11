@@ -4,21 +4,22 @@ import { Button } from "./ui/button";
 import { MdNightlight, MdSunny } from "react-icons/md";
 
 export default function ThemeButton() {
-  const { theme, setTheme } = useTheme();
-  console.log(theme);
+  const { setTheme, resolvedTheme, theme } = useTheme();
+  console.log(theme, resolvedTheme);
   return (
     <Button
       variant="ghost"
-      className="p-3 text-lg"
+      className="p-3 text-lg relative"
       onClick={() => {
-        if (theme === "dark") {
+        if (theme === "dark" || resolvedTheme === "dark") {
           setTheme("light");
         } else {
           setTheme("dark");
         }
       }}
     >
-      {theme === "dark" ? <MdSunny /> : <MdNightlight />}
+      <MdSunny className="scale-100 dark:scale-0 absolute" />
+      <MdNightlight className="scale-0 dark:scale-100 absolute" />
     </Button>
   );
 }
