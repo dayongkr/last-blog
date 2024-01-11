@@ -5,31 +5,26 @@ import { usePathname } from "next/navigation";
 
 export default function Nav() {
   const pathname = usePathname();
-  const items = [
-    {
-      name: "blog",
-      path: "/",
-    },
-    {
-      name: "about",
-      path: "/about",
-    },
-  ];
-  console.log(pathname.startsWith("/"));
   return (
     <nav className="flex gap-6 items-center w-full">
-      {items.map((item) => (
-        <Link
-          href={item.path}
-          key={item.name}
-          className={cn(
-            "text-gray-400 text-sm hover:text-gray-600 capitalize",
-            pathname.startsWith(item.path) && "text-gray-900"
-          )}
-        >
-          {item.name}
-        </Link>
-      ))}
+      <Link
+        href="/"
+        className={cn(
+          "text-gray-400 text-sm hover:text-gray-600 capitalize",
+          !pathname.startsWith("/about") && "text-gray-900 dark:text-gray-100"
+        )}
+      >
+        blog
+      </Link>
+      <Link
+        href="/about"
+        className={cn(
+          "text-gray-400 text-sm hover:text-gray-600 capitalize",
+          pathname.startsWith("/about") && "text-gray-900 dark:text-gray-100"
+        )}
+      >
+        about
+      </Link>
     </nav>
   );
 }

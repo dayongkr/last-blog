@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import Providers from "@/components/Providers";
 
 const noto = Noto_Sans_KR({
   weight: ["300", "500", "700", "900"],
@@ -19,12 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="kr">
+    <html lang="kr" suppressHydrationWarning>
       <body className={noto.className}>
-        <div className="min-h-dvh w-full">
-          <Header />
-          {children}
-        </div>
+        <Providers>
+          <div className="min-h-dvh w-full">
+            <Header />
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );
