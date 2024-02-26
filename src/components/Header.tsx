@@ -5,7 +5,7 @@ import ThemeButton from './ThemeButton'
 
 export default function Header() {
   return (
-    <header className="flex w-full items-center justify-center border-b border-b-gray-200 dark:border-b-gray-800">
+    <header className="sticky top-0 z-50 flex w-full items-center justify-center border-b border-b-border bg-background">
       <div className="flex w-full max-w-5xl items-center justify-between px-4 py-2 md:px-8 md:py-3">
         <Link href="/" className="shrink-0 font-bold">
           Dayong Blog
@@ -16,7 +16,7 @@ export default function Header() {
               <FaGithub className="text-lg" />
             </Link>
           </Button>
-          {/* <ThemeButton /> */}
+          <ThemeButton />
         </div>
       </div>
     </header>

@@ -1,11 +1,45 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import logo from '@/public/profile.png'
-import { Badge } from '@/src/components/ui/badge'
+import logo from '@public/profile.png'
+import { Badge } from '@/components/ui/badge'
 import Image from 'next/image'
+import Link from 'next/link'
+import { getRecentPosts } from '@/lib/api'
+import dayjs from 'dayjs'
+
+export default function Home() {
+  const posts = getRecentPosts()
+  return (
+    <>
+      <Bio />
+      <div className="grid grid-cols-1 gap-8">
+        <h2 className="border-b border-b-border pb-3 font-bold">
+          Recent posts
+        </h2>
+        <div className="flex flex-col gap-8">
+          {posts.map((post) => (
+            <Link
+              href={`post/${post.category}/${post.slug}`}
+              key={post.title}
+              className="flex flex-col gap-2"
+            >
+              <div className="flex items-center gap-2">
+                <Badge className="uppercase">{post.category}</Badge>
+                <h3 className="text-lg font-bold">{post.title}</h3>
+              </div>
+              <p className="line-clamp-2 text-sm opacity-60">{post.excerpt}</p>
+              <p className="text-sm opacity-60">
+                {dayjs(post.date).format('YYYY년 MM월 DD일')}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </>
+  )
+}
 
 function Bio() {
   return (
-    <section className="flex items-center md:gap-6">
+    <section className="flex w-full items-center md:gap-6">
       <Image
         className="scale-75 md:scale-100"
         src={logo}
@@ -25,37 +59,5 @@ function Bio() {
         </div>
       </div>
     </section>
-  )
-}
-
-export default function Home() {
-  return (
-    <>
-      <Bio />
-      <div className="grid grid-cols-1 gap-8">
-        <h2 className="border-b border-b-gray-200 pb-3 font-bold">
-          Latest posts
-        </h2>
-        <div className="flex flex-col gap-8">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <Badge>ETC</Badge>
-                <h3 className="text-lg font-bold">안녕하세요!</h3>
-              </div>
-              <p className="line-clamp-2 text-sm text-gray-500">
-                lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-              <p className="text-sm text-gray-500">2024년 01월 01일</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
   )
 }

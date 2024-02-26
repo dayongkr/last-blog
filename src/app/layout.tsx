@@ -24,9 +24,9 @@ export default function RootLayout({
     <html lang="kr" suppressHydrationWarning>
       <body className={noto.className}>
         <Providers>
-          <div className="flex min-h-dvh w-full flex-col items-center">
+          <div className="flex min-h-dvh w-full flex-col items-center bg-background">
             <Header />
-            <main className="grid w-full max-w-5xl grid-cols-1 gap-8 px-4 py-8 md:gap-16 md:px-8 md:py-16">
+            <main className="flex w-full max-w-screen-lg flex-col items-center justify-start gap-8 px-4 py-8 md:gap-16 md:px-8 md:py-16">
               {children}
             </main>
           </div>
